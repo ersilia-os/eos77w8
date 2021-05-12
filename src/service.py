@@ -12,7 +12,7 @@ import pickle
 
 from bentoml.service import BentoServiceArtifact
 
-CHECKPOINTS_BASEDIR = "BBBPbase"
+CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
 
 MODEL_NAME = "model"
