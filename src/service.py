@@ -1,22 +1,20 @@
+from typing import List
+
 from bentoml import BentoService, api, artifacts
 from bentoml.adapters import JsonInput
 from bentoml.types import JsonSerializable
-from typing import List
+from bentoml.service import BentoServiceArtifact
 
-import shutil
+import pickle
 import os
-import csv
+import shutil
+import collections
 import tempfile
 import subprocess
-import pickle
-
-from bentoml.service import BentoServiceArtifact
+import numpy as np
 
 CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
-
-MODEL_NAME = "model"
-
 
 def load_model(framework_dir, checkpoints_dir):
     mdl = Model()
@@ -27,9 +25,10 @@ def load_model(framework_dir, checkpoints_dir):
 class Model(object):
     def __init__(self):
         self.DATA_FILE = "data.csv"
-        self.FEAT_FILE = "features.npz"
-        self.PRED_FILE = "pred.csv"
+        self.FEATURES_FILE = "features.npz"
+        self.PRED_FILE = "pred.npz"
         self.RUN_FILE = "run.sh"
+        self.LOG_FILE = "run.log"
 
     def load(self, framework_dir, checkpoints_dir):
         self.framework_dir = framework_dir
@@ -41,63 +40,46 @@ class Model(object):
     def set_framework_dir(self, dest):
         self.framework_dir = os.path.abspath(dest)
 
-    def read_columns(self):
-        self.columns = []
-        with open(os.path.join(self.framework_dir, "columns.txt"), "r") as f:
-            for l in f:
-                l = l.rstrip()
-                if l:
-                    self.columns += [l]
-
     def predict(self, smiles_list):
-        self.read_columns()
         tmp_folder = tempfile.mkdtemp()
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
-        feat_file = os.path.join(tmp_folder, self.FEAT_FILE)
+        features_file = os.path.join(tmp_folder, self.FEATURES_FILE)
         pred_file = os.path.join(tmp_folder, self.PRED_FILE)
+        log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
-            f.write(",".join(["smiles"] + self.columns) + os.linesep)
+            f.write("smiles"+os.linesep)
             for smiles in smiles_list:
-                f.write(",".join([smiles] + ["0"]*len(self.columns)) + os.linesep)
+                f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
-            lines = ["export KMP_DUPLICATE_LIB_OK=TRUE"]
-            lines += [
-                "python {0}/save_features.py --data_path {1} --save_path {2} --features_generator rdkit_2d_normalized --restart".format(
-                    self.framework_dir, data_file, feat_file
-                )
-            ]
-            lines += [
-                "python {0}/predict.py predict --data_path {1} --features_path {2} --checkpoint_dir {3} --no_features_scaling --output {4}".format(
+            lines = [
+                "python {0}/grover/scripts/save_features.py --data_path {1} --save_path {2} --features_generator rdkit_2d_normalized --restart".format(
                     self.framework_dir,
                     data_file,
-                    feat_file,
+                    features_file,
+                ),
+                "python {0}/grover/main.py fingerprint --data_path {1} --features_path {2} --checkpoint_path {3}/grover_large.pt --fingerprint_source both --output {4} --no_cuda".format(
+                    self.framework_dir,
+                    data_file,
+                    features_file,
                     self.checkpoints_dir,
-                    pred_file,
+                    pred_file
                 )
             ]
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
-        with open(os.devnull, "w") as fp:
+        with open(log_file, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
-        with open(pred_file, "r") as f:
-            reader = csv.reader(f)
-            h = next(reader)
-            result = []
-            for r in reader:
-                pred = {}
-                for i, col in enumerate(h):
-                    if i == 0: continue
-                    pred[col] = float(r[i])
-                result += [pred]
-        return result
+        V = np.load(pred_file)["fps"]
+        R = []
+        for i in range(V.shape[0]):
+            R += [{"fingerprint": list(V[i,:])}]
+        return R
 
 
 class Artifact(BentoServiceArtifact):
-    """Dummy  artifact to deal with file locations of checkpoints"""
-
     def __init__(self, name):
         super(Artifact, self).__init__(name)
         self._model = None
@@ -144,11 +126,11 @@ class Artifact(BentoServiceArtifact):
         pickle.dump(self._model, open(self._model_file_path(dst), "wb"))
 
 
-@artifacts([Artifact(MODEL_NAME)])
+@artifacts([Artifact("model")])
 class Service(BentoService):
     @api(input=JsonInput(), batch=True)
     def predict(self, input: List[JsonSerializable]):
-        input=input[0]
-        smiles_list=[inp["input"] for inp in input]
+        input = input[0]
+        smiles_list = [inp["input"] for inp in input]
         output = self.artifacts.model.predict(smiles_list)
-        return[output]
+        return [output]
