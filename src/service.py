@@ -47,36 +47,32 @@ class Model(object):
         pred_file = os.path.join(tmp_folder, self.PRED_FILE)
         log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
-            f.write("smiles"+os.linesep)
+            
             for smiles in smiles_list:
                 f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
-            lines = [
-                "python {0}/grover/scripts/save_features.py --data_path {1} --save_path {2} --features_generator rdkit_2d_normalized --restart".format(
-                    self.framework_dir,
-                    data_file,
-                    features_file,
-                ),
-                "python {0}/grover/main.py fingerprint --data_path {1} --features_path {2} --checkpoint_path {3}/grover_large.pt --fingerprint_source both --output {4} --no_cuda".format(
-                    self.framework_dir,
-                    data_file,
-                    features_file,
-                    self.checkpoints_dir,
-                    pred_file
-                )
-            ]
+            lines = ["python {0}/grover/main.py {1} {2}".format(self.framework_dir, data_file, pred_file)] 
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
         with open(log_file, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
-        V = np.load(pred_file)["fps"]
-        R = []
-        for i in range(V.shape[0]):
-            R += [{"fingerprint": list(V[i,:])}]
-        return R
+        with open(pred_file, "r") as f:
+            reader = csv.reader(f)
+            h = next(reader)[1:]
+            R = []
+            for r in reader:
+                R += [{"outcomes": [Float(x) for x in r[1:]]}]
+        meta = {
+            "outcomes": h
+        }
+        result = {
+            'result': R,
+            'meta': meta
+        }
+        return result
 
 
 class Artifact(BentoServiceArtifact):
