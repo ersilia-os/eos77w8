@@ -21,7 +21,12 @@ def load_model(framework_dir, checkpoints_dir):
     mdl.load(framework_dir, checkpoints_dir)
     return mdl
 
-
+def Float(x):
+    try:
+        return float(x)
+    except:
+        return None
+    
 class Model(object):
     def __init__(self):
         self.DATA_FILE = "data.csv"
