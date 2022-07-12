@@ -31,7 +31,7 @@ class Model(object):
     def __init__(self):
         self.DATA_FILE = "data.csv"
         self.FEATURES_FILE = "features.npz"
-        self.PRED_FILE = "pred.npz"
+        self.PRED_FILE = "pred.csv"
         self.RUN_FILE = "run.sh"
         self.LOG_FILE = "run.log"
 
@@ -67,6 +67,7 @@ class Model(object):
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)[1:]
+            h = [c.upper().replace(",", "").replace("(", "").replace(")", "") for c in h]
             R = []
             for r in reader:
                 R += [{"outcomes": [Float(x) for x in r[1:]]}]
