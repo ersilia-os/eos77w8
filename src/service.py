@@ -29,11 +29,11 @@ def Float(x):
     
 class Model(object):
     def __init__(self):
-        self.DATA_FILE = "data.csv"
-        self.FEATURES_FILE = "features.npz"
-        self.PRED_FILE = "pred.csv"
-        self.RUN_FILE = "run.sh"
-        self.LOG_FILE = "run.log"
+        self.DATA_FILE = "_data.csv"
+        self.FEATURES_FILE = "_features.npz"
+        self.PRED_FILE = "_pred.csv"
+        self.RUN_FILE = "_run.sh"
+        self.LOG_FILE = "_run.log"
 
     def load(self, framework_dir, checkpoints_dir):
         self.framework_dir = framework_dir
@@ -52,7 +52,6 @@ class Model(object):
         pred_file = os.path.join(tmp_folder, self.PRED_FILE)
         log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
-            
             for smiles in smiles_list:
                 f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
