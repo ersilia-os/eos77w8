@@ -91,7 +91,7 @@ if __name__ == '__main__':
     csv_path = smiles_to_dataframe(input_txt_path)
 
     tmp_folder = tempfile.mkdtemp(prefix="ersilia-")
-    tmp_file = os.path.join(tmp_folder, "features.csv")
+    tmp_file = os.path.join(tmp_folder, "features.npz")
         
     s = os.path.dirname(os.path.abspath(__file__))
     p = Path(s)
