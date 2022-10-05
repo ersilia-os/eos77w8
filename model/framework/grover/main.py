@@ -72,7 +72,9 @@ def smiles_to_dataframe(txt_file_path):
     
     return input_csv_path
 
-    
+ 
+tmp_folder = tempfile.mktemp()
+features_path = os.path.join(tmp_folder, "features.npz")
 
 if __name__ == '__main__':
     # setup random seed
@@ -94,7 +96,7 @@ if __name__ == '__main__':
     p = Path(s)
     model_path = str(p.parent.parent.absolute())
 
-    args = Namespace(batch_size=32, checkpoint_dir=model_path+'/framework/finetune/sider', checkpoint_path=None, checkpoint_paths=[model_path+'/framework/finetune/sider/fold_0/model_0/model.pt', model_path+'/framework/finetune/sider/fold_2/model_0/model.pt', model_path+'/framework/finetune/sider/fold_1/model_0/model.pt'], cuda=False, data_path=csv_path, ensemble_size=3, features_generator=None, features_path=["features.npz"], fingerprint=False, gpu=0, no_cache=True, no_features_scaling=True, output_path=output_path, parser_name='predict')
+    args = Namespace(batch_size=32, checkpoint_dir=model_path+'/framework/finetune/sider', checkpoint_path=None, checkpoint_paths=[model_path+'/framework/finetune/sider/fold_0/model_0/model.pt', model_path+'/framework/finetune/sider/fold_2/model_0/model.pt', model_path+'/framework/finetune/sider/fold_1/model_0/model.pt'], cuda=False, data_path=csv_path, ensemble_size=3, features_generator=None, features_path=[features_path], fingerprint=False, gpu=0, no_cache=True, no_features_scaling=True, output_path=output_path, parser_name='predict')
 
 
     sf.save_features_main(csv_path)
@@ -104,4 +106,4 @@ if __name__ == '__main__':
     write_prediction(avg_preds, test_smiles, args)
 
     os.remove(csv_path)
-    os.remove("features.npz")
+    os.remove(features_path)
