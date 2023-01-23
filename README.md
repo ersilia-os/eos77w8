@@ -1,28 +1,40 @@
-# Drug side effects
+# Adverse Drug Reactions
 
-## Model Identifiers
-* Slug: grover-sider
-* Ersilia ID: eos77w8
-* Tags: toxicity,	side-effect,	ADMET
+The model predicts the putative adverse drug reactions (ADR) of a molecule, using the SIDER database (MoleculeNet) that contains pairs of marketed drugs and their described ADRs. This model has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER).
 
-## Model Description
-Prediction of side effects based on Grover, a graph neural network for QSAR modelling based pretrained on a large unlabelled dataset. Grover has been fine-tuned using the using the Side Effect Resource (SIDER) database compiled by MoleculeNet. GROVER predictions consistently outperformed other state-of-the-art methods for SIDER and other benchmark datasets from MoleculeNet.
-* Input: SMILES
-* Output: Score	(Higher score indicates higher side effect potential)
-* Model type: Regression
-* Mode of Training: Pretrained
-* Training data: 10,000,000	(https://paperswithcode.com/dataset/moleculenet)
-* Experimentally validated: No
+## Identifiers
 
-## Source code
-This model was published by Yu R., Yatao B. et al. Self-Supervised Graph Transformer on Large-Scale Molecular Data. *arXiv Labs* 2018. DOI: https://doi.org/10.48550/arXiv.2007.02835
-* Code: https://github.com/tencent-ailab/grover
-* Checkpoints: https://github.com/tencent-ailab/grover/tree/main/grover/model
+* EOS model ID: `eos77w8`
+* Slug: `grover-sider`
+
+## Characteristics
+
+* Input: `Compound`
+* Input Shape: `Single`
+* Task: `Classification`
+* Output: `Probability`
+* Output Type: `Float`
+* Output Shape: `List`
+* Interpretation: Predicted ADRs classified in 27 groups
+
+## References
+
+* [Publication](https://arxiv.org/abs/2007.02835)
+* [Source Code](https://github.com/tencent-ailab/grover)
+* Ersilia contributor: [Amna-28](https://github.com/Amna-28)
+
+## Citation
+
+If you use this model, please cite the [original authors](https://arxiv.org/abs/2007.02835) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
 
 ## License
-The GPL-v3 license applies to all parts of the repository that are not externally maintained libraries. This repository uses the externally maintained library "grover", located at `/model` and licensed under an MIT license
 
-## History
-1. Model was downloaded on 12.05.21 from [TencentAILab](https://github.com/tencent-ailab/grover)
-2. We duplicated task/predict.py and scripts/save_features.py from Tencent GitHub repository
-3. Model was incorporated to Ersilia on 12/05/2021
+This package is licensed under a GPL-3.0 license. The model contained within this package is licensed under a MIT license.
+
+Notice: Ersilia grants access to these models 'as is' provided by the original authors, please refer to the original code repository and/or publication if you use the model in your research.
+
+## About Us
+
+The [Ersilia Open Source Initiative](https://ersilia.io) is a Non Profit Organization ([1192266](https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/5170657/full-print)) with the mission is to equip labs, universities and clinics in LMIC with AI/ML tools for infectious disease research.
+
+[Help us](https://www.ersilia.io/donate) achieve our mission!
