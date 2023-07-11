@@ -23,6 +23,9 @@ The model predicts the putative adverse drug reactions (ADR) of a molecule, usin
 * [Source Code](https://github.com/tencent-ailab/grover)
 * Ersilia contributor: [Amna-28](https://github.com/Amna-28)
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos77w8)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://arxiv.org/abs/2007.02835) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
