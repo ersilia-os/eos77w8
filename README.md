@@ -26,6 +26,7 @@ The model predicts the putative adverse drug reactions (ADR) of a molecule, usin
 ## Ersilia model URLs
 * [GitHub](https://github.com/ersilia-os/eos77w8)
 * [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos77w8) (AMD64, ARM64)
 
 ## Citation
 
