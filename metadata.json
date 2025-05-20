@@ -3,21 +3,18 @@
     "Slug": "grover-sider",
     "Status": "Ready",
     "Title": "Adverse Drug Reactions",
-    "Description": "The model predicts the putative adverse drug reactions (ADR) of a molecule, using the SIDER database (MoleculeNet) that contains pairs of marketed drugs and their described ADRs. This model has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER).\n\n",
+    "Description": "The model predicts the putative adverse drug reactions (ADR) of a molecule, using the SIDER database (MoleculeNet) that contains pairs of marketed drugs and their described ADRs. This model has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER).",
+    "Deployment": [
+        "Local"
+    ],
     "Source": "Local",
     "Source Type": "External",
+    "Task": "Annotation",
+    "Subtask": "Activity prediction",
     "Input": [
         "Compound"
     ],
     "Input Dimension": 1,
-    "Task": "Annotation",
-    "Subtask": "Activity prediction",
-    "Biomedical Area": [
-        "ADMET"
-    ],
-    "Target Organism": [
-        "Homo sapiens"
-    ],
     "Output": [
         "Probability"
     ],
@@ -29,20 +26,25 @@
         "MoleculeNet",
         "Side effects"
     ],
-    "Publication": "https://arxiv.org/abs/2007.02835",
+    "Biomedical Area": [
+        "ADMET"
+    ],
+    "Target Organism": [
+        "Homo sapiens"
+    ],
     "Publication Type": "Preprint",
     "Publication Year": 2020,
+    "Publication": "https://arxiv.org/abs/2007.02835",
     "Source Code": "https://github.com/tencent-ailab/grover",
     "License": "MIT",
     "Contributor": "Amna-28",
     "Incorporation Date": "2021-06-04",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos77w8",
     "Docker Architecture": [
         "AMD64",
         "ARM64"
     ],
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip",
-    "Deployment": [
-        "Local"
-    ]
+    "Model Size": 1323.0,
+    "Environment Size": 2410.0
 }
