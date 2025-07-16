@@ -16,7 +16,7 @@
     ],
     "Input Dimension": 1,
     "Output": [
-        "Probability"
+        "Score"
     ],
     "Output Dimension": 27,
     "Output Consistency": "Fixed",
