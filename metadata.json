@@ -38,7 +38,7 @@
     "Source Code": "https://github.com/tencent-ailab/grover",
     "License": "MIT",
     "Contributor": "Amna-28",
-    "Incorporation Date": "2021-06-04",
+    "Incorporation Date": "2021-05-12",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos77w8",
     "Docker Architecture": [
