@@ -2,7 +2,7 @@
 
 The model predicts the putative adverse drug reactions (ADR) of a molecule, using the SIDER database (MoleculeNet) that contains pairs of marketed drugs and their described ADRs. This model has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER).
 
-This model was incorporated on 2021-06-04.
+This model was incorporated on 2021-05-12.
 
 
 ## Information
