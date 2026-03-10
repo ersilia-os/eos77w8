@@ -2,7 +2,7 @@
 
 The model predicts the putative adverse drug reactions (ADR) of a molecule, using the SIDER database (MoleculeNet) that contains pairs of marketed drugs and their described ADRs. This model has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER).
 
-This model was incorporated on 2021-05-12.Last packaged on 2025-10-10.
+This model was incorporated on 2021-05-12.Last packaged on 2026-03-10.
 
 ## Information
 ### Identifiers
@@ -44,17 +44,17 @@ _10 of 27 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos77w8](https://hub.docker.com/r/ersiliaos/eos77w8)
-- **Docker Architecture:** `AMD64`, `ARM64`
+- **Docker Architecture:** `AMD64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `1323`
 - **Environment Size (Mb):** `2406`
-- **Image Size (Mb):** `6392.21`
+- **Image Size (Mb):** `6394.66`
 
 **Computational Performance (seconds):**
-- 10 inputs: `33.93`
-- 100 inputs: `157.85`
+- 10 inputs: `35.52`
+- 100 inputs: `161.37`
 - 10000 inputs: `-1`
 
 ### References
