@@ -57,11 +57,12 @@ def smiles_to_dataframe(input_file):
             ]
     for n in names:
         df[n] = dummy_labels.values
-    input_csv_path = "run_input_grover.csv"
-    df.to_csv(input_csv_path, index=False)  # Overwrites original CSV
+    tmp_fd, input_csv_path = tempfile.mkstemp(suffix=".csv")
+    os.close(tmp_fd)
+    df.to_csv(input_csv_path, index=False)
     return input_csv_path
-    
-tmp_folder = tempfile.mktemp()
+
+tmp_folder = tempfile.mkdtemp()
 features_path = os.path.join(tmp_folder, "features.npz")
 
 def grover_predict(input_txt_path, output_path):
