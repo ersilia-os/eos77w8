@@ -59,7 +59,7 @@ _10 of 27 columns are shown_
 
 ### References
 - **Source Code**: [https://github.com/tencent-ailab/grover](https://github.com/tencent-ailab/grover)
-- **Publication**: [https://arxiv.org/abs/2007.02835](https://arxiv.org/abs/2007.02835)
+- **Publication**: [https://doi.org/10.48550/arXiv.2007.02835](https://doi.org/10.48550/arXiv.2007.02835)
 - **Publication Type:** `Preprint`
 - **Publication Year:** `2020`
 - **Ersilia Contributor:** [Amna-28](https://github.com/Amna-28)
