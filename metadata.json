@@ -23,7 +23,6 @@
     "Interpretation": "Predicted ADRs classified in 27 groups",
     "Tag": [
         "Toxicity",
-        "MoleculeNet",
         "Side effects"
     ],
     "Biomedical Area": [
