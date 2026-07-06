@@ -14,7 +14,7 @@ This model was incorporated on 2021-05-12.Last packaged on 2026-03-10.
 - **Subtask:** `Activity prediction`
 - **Biomedical Area:** `ADMET`
 - **Target Organism:** `Homo sapiens`
-- **Tags:** `Toxicity`, `MoleculeNet`, `Side effects`
+- **Tags:** `Toxicity`, `Side effects`
 
 ### Input
 - **Input:** `Compound`
