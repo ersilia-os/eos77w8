@@ -1,6 +1,6 @@
 # Adverse Drug Reactions
 
-The model predicts the putative adverse drug reactions (ADR) of a molecule, using the SIDER database (MoleculeNet) that contains pairs of marketed drugs and their described ADRs. This model has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER).
+Anticipates which adverse reactions a marketed drug may provoke, grouped into 27 system organ classes. SIDER, distributed through MoleculeNet, links approved drugs to the side effects recorded on their labels, and those associations form the training signal. A self-supervised graph transformer pretrained on 10 million molecules was fine-tuned across all classes at once. Label text is drawn from package inserts rather than controlled trials, so the relationships captured are associative and reflect reporting practice as much as pharmacology.
 
 This model was incorporated on 2021-05-12.Last packaged on 2026-07-06.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2021-05-12.Last packaged on 2026-07-06.
 ### Output
 - **Output Dimension:** `27`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Predicted ADRs classified in 27 groups
+- **Interpretation:** Probability of causing an adverse reaction in each of 27 organ system classes.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
