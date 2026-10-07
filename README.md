@@ -1,6 +1,6 @@
 # Adverse Drug Reactions
 
-Anticipates which adverse reactions a marketed drug may provoke, grouped into 27 system organ classes. SIDER, distributed through MoleculeNet, links approved drugs to the side effects recorded on their labels, and those associations form the training signal. A self-supervised graph transformer pretrained on 10 million molecules was fine-tuned across all classes at once. Label text is drawn from package inserts rather than controlled trials, so the relationships captured are associative and reflect reporting practice as much as pharmacology.
+Anticipates which adverse reactions a marketed drug may provoke, grouped into 27 system organ classes. SIDER, distributed through MoleculeNet, links 1,427 approved drugs to the side effects recorded on their labels, and those associations form the training signal. A self-supervised graph transformer pretrained on 10 million molecules was fine-tuned across all classes at once, averaging three fine-tuned folds. Label text comes from package inserts rather than controlled trials, so the relationships captured are associative and reflect reporting practice as much as pharmacology.
 
 This model was incorporated on 2021-05-12.Last packaged on 2026-07-06.
 
