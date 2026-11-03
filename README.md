@@ -3,7 +3,7 @@
 Anticipates which adverse reactions a marketed drug may provoke, grouped into 27 system organ classes. SIDER, distributed through MoleculeNet, links 1,427 approved drugs to the side effects recorded on their labels, and those associations form the training signal. A self-supervised graph transformer pretrained on 10 million molecules was fine-tuned across all classes at once, averaging three fine-tuned folds. Label text comes from package inserts rather than controlled trials, so the relationships captured are associative and reflect reporting practice as much as pharmacology.
 
 This model was incorporated on 2021-05-12.
-Last packaged on 2026-07-06.
+Last packaged on 2026-11-03.
 
 ## Information
 ### Identifiers
@@ -45,18 +45,18 @@ _10 of 27 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos77w8](https://hub.docker.com/r/ersiliaos/eos77w8)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos77w8.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `1323`
 - **Environment Size (Mb):** `2406`
-- **Image Size (Mb):** `6409.19`
+- **Image Size (Mb):** `3699.06`
 
 **Computational Performance (seconds):**
-- 10 inputs: `29.7`
-- 100 inputs: `49.65`
-- 10000 inputs: `1796.61`
+- 10 inputs: `31.42`
+- 100 inputs: `157.55`
+- 10000 inputs: `-1`
 
 ### References
 - **Source Code**: [https://github.com/tencent-ailab/grover](https://github.com/tencent-ailab/grover)
